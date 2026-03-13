@@ -1,18 +1,23 @@
 from pathlib import Path
+import os
+import dj_database_url
 
-# Rutas base del proyecto (ejemplo: BASE_DIR / 'subdir')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'matriz_riesgo',
-        'USER': 'python_conectar',
-        'PASSWORD': 'riesgos',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
     }
-} 
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,12 +29,14 @@ INSTALLED_APPS = [
     'core',
 ]
 
-# Configuración mínima para desarrollo
-SECRET_KEY = 'django-insecure-dev-key'
-DEBUG = True
-ALLOWED_HOSTS = []
 
-# Middleware mínimo necesario para sesiones, autenticación y mensajes
+SECRET_KEY = 'django-insecure-dev-key'
+
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -40,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Configuración de templates mínima para que admin y plantillas funcionen
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -57,15 +64,14 @@ TEMPLATES = [
     },
 ]
 
-# Módulo raíz de URLs del proyecto
+
 ROOT_URLCONF = 'matriz_riesgo.urls'
 
-# Archivos estáticos (CSS, JS, imágenes)
+
 STATIC_URL = '/static/'
-# Directorios adicionales de static para desarrollo
+
 STATICFILES_DIRS = [
     BASE_DIR / 'core' / 'static',
 ]
 
-
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'

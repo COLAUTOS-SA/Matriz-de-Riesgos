@@ -1,0 +1,1 @@
+web: gunicorn matriz_riesgo.wsgi
