@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <h2>Inicio - Superadmin</h2>
+  <p>Bienvenido Superadmin. Aquí van las opciones administrativas.</p>
+  <p><a href="{% url 'logout' %}">Cerrar sesión</a></p>
+  <ul>
+            <li>
+                <a href="{% url 'superadmin_usuarios' %}">
+                    <span class="material-symbols-outlined icon">manage_accounts</span>
+                    Gestión de Usuarios
+                </a>
+            </li>
+  </ul>
+{% endblock %}

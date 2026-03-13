@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eliminar Usuario</title>
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/admin_sidebar_superadmin.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/usuario_delete_confirm_superadmin.css' %}">
+</head>
+<body>
+<div class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h2>APLICATIVO</h2>
+                    <span>Super Administrador</span>
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="{% url 'superadmin_profile' %}"><span class="material-symbols-outlined icon">person</span>Mi Perfil</a></li>
+            <li><a href="{% url 'superadmin_items' %}"><span class="material-symbols-outlined icon">folder</span>Gestión de Items</a></li>
+            <li><a href="{% url 'superadmin_usuarios' %}"><span class="material-symbols-outlined icon">manage_accounts</span>Gestión de Usuarios</a></li>
+        </ul>
+    </aside>
+    <main class="admin-main">
+        <h2>Eliminar Usuario</h2>
+        <div class="confirm-box">
+            <p>¿Eliminar usuario "{{ usuario.nombre }}" (id {{ usuario.id_usuario }})?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">Eliminar</button>
+                <a href="{% url 'superadmin_usuarios' %}" class="btn-cancel">Cancelar</a>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

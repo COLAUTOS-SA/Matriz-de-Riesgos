@@ -1,0 +1,164 @@
+/* Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Layout */
+.admin-layout {
+  display: flex;
+  min-height: 200vh;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+  width: 260px;
+  background: #eafff8;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* MAIN */
+.admin-main {
+  margin-left: 260px;
+  padding: 24px;
+  background: #f5f6fb;
+  flex: 1;
+}
+
+/* HEADER */
+.sidebar-header {
+  background: #ffffff;
+  padding: 25px 20px 20px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Franja verde elegante */
+.sidebar-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;     /* menos ancho */
+  height: 20px;     /* menos alto */
+  background: #2d8f7f;
+  clip-path: polygon(0 0, 100% 0, 65% 100%, 0% 0%);
+  z-index: 0;
+}
+
+.sidebar-header {
+  background: #f5f6fb;
+  padding: 35px 20px 20px 20px; /* más espacio arriba */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Contenido por encima de la franja */
+.header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Texto */
+.header-text h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.header-text span {
+  font-size: 14px;
+  color: #444;
+}
+
+.logo {
+  width: 100px;
+}
+
+/* MENÚ */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Items */
+.sidebar-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  text-decoration: none;
+  color: #1f1f1f;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+/* Iconos negros */
+.icon {
+  font-size: 18px;
+  filter: none;
+  opacity: 1;
+  color: #000;
+}
+
+/* Hover */
+.sidebar-menu li a:hover {
+  background: #e6f0ee;
+}
+
+/* Activo */
+.sidebar-menu li.active a {
+  background: #a8d0c8;
+  color: #0b3d35;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.sidebar-footer {
+  padding: 18px;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #2b2b2b;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
+}

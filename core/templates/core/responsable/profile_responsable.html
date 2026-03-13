@@ -1,0 +1,121 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Responsable - Matriz Riesgo</title>
+
+  <link rel="stylesheet" href="{% static 'core/css/responsable/admin_sidebar_responsable.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/responsable/profile_responsable.css' %}">
+    
+  <!-- Importación de Material Icons: fuente de iconos usada para botones y enlaces en la interfaz -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+
+    <!-- HEADER -->
+    <div class="sidebar-header">
+      <div class="header-content">
+        <div class="header-text">
+          <h2>APLICATIVO</h2>
+          <span>Responsable</span>
+        </div>
+        <img src="{% static 'core/img/logo.png' %}" 
+           alt="Logo" 
+           class="logo">
+      </div>
+    </div>
+
+         <!-- MENÚ -->
+        <ul class="sidebar-menu">
+
+            <li class="active">
+                <a href="{% url 'responsable_profile' %}">
+                    <span class="material-symbols-outlined icon">person</span>
+                    Mi Perfil
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'responsable_revision' %}">
+                    <span class="material-symbols-outlined icon">search</span>
+                    Revisión
+                </a>
+            </li>
+
+        </ul>
+
+    <!-- FOOTER -->
+    <div class="sidebar-footer">
+      <a href="{% url 'logout' %}" class="logout-btn">
+        ⏻ Cerrar Sesión
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+<main class="admin-main">
+
+  <h2 class="profile-title">Mi Perfil</h2>
+
+  <div class="profile-content">
+
+    <div class="profile-row">
+      <label>Nombre:</label>
+      <div class="profile-box">{{ usuario.nombre }}</div>
+    </div>
+
+    <div class="profile-row">
+      <label>Correo:</label>
+      <div class="profile-box">{{ usuario.correo }}</div>
+    </div>
+
+    <div class="profile-row">
+      <label>Sede:</label>
+      <div class="profile-box">{{ usuario.id_sede.nombre }}</div>
+    </div>
+
+    <div class="profile-row">
+      <label>Área:</label>
+      <div class="profile-box">{{ usuario.id_area.nombre }}</div>
+    </div>
+
+    <div class="profile-row">
+      <label>Rol:</label>
+      <div class="profile-box">{{ usuario.id_rol.nombre }}</div>
+    </div>
+
+<div class="profile-row">
+  <label>Contraseña:</label>
+
+  <div class="profile-password">
+    <div class="profile-box">*************</div>
+    <a href="{% url 'responsable_change_password' %}" class="btn-password">
+      Cambiar Contraseña
+    </a>
+  </div>
+</div>
+
+  </div>
+
+
+  <!-- Imagen borde inferior -->
+  <img src="{% static 'core/img/borde.png' %}" 
+       alt="Borde inferior"
+       class="profile-borde">
+
+</main>
+
+</div>
+
+</body>
+</html>

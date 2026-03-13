@@ -1,0 +1,114 @@
+/* ================================
+   CONTENEDOR PRINCIPAL
+================================ */
+
+.admin-main {
+  background-color: #ffffff;
+  padding: 0 0 60px 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ================================
+   TITULO
+================================ */
+
+.admin-main h2 {
+  background-color: #2b2b2b;
+  color: #fff;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 0 0 20px 0;
+  margin: 0;
+  margin-bottom: 45px;
+  font-size: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+/* ================================
+   GRID INSPECCIÓN
+================================ */
+
+.inspect-content {
+  margin-left: 60px;
+  width: 520px;
+  position: relative;
+  z-index: 3;
+
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  column-gap: 18px;
+  row-gap: 16px;
+  align-items: center;
+}
+
+.inspect-content label {
+  text-align: right;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* ================================
+   CAJAS DE VALOR
+================================ */
+
+.inspect-box {
+  background-color: #e4e4e4;
+  color: #2b2b2b;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 12.5px;
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ================================
+   BOTÓN VOLVER
+================================ */
+
+.admin-main a.volver-btn {
+  display: inline-block;
+  background-color: #3ba89c;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.admin-main a.volver-btn:hover {
+  background-color: #2f8e84;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+  .inspect-content {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: block;
+  }
+
+  .inspect-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+  }
+
+  .inspect-box {
+    margin-bottom: 14px;
+  }
+}

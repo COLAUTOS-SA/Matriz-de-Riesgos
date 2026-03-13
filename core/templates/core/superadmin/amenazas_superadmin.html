@@ -1,0 +1,233 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel Super Admin - Matriz Riesgo</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/admin_sidebar_superadmin.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/amenazas_superadmin.css' %}">
+    
+    <!-- Importación de Material Icons: fuente de iconos usada para botones y enlaces en la interfaz -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+
+        <!-- HEADER -->
+        <div class="sidebar-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h2>APLICATIVO</h2>
+                    <span>Super Administrador</span>
+                </div>
+                <img src="{% static 'core/img/logo.png' %}" 
+                     alt="Logo" 
+                     class="logo">
+            </div>
+        </div>
+
+        <!-- MENÚ -->
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'superadmin_profile' %}">
+                    <span class="material-symbols-outlined icon">person</span>
+                    Mi Perfil
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_items' %}">
+                    <span class="material-symbols-outlined icon">folder</span>
+                    Gestión de Items
+                </a>
+            </li>
+
+            <li  class="active">
+                <a href="{% url 'superadmin_amenazas' %}">
+                    <span class="material-symbols-outlined icon">warning</span>
+                    Gestión de Amenazas
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_controles' %}">
+                    <span class="material-symbols-outlined icon">checklist</span>
+                    Gestión de Controles
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_asignacion' %}">
+                    <span class="material-symbols-outlined icon">groups</span>
+                    Asignación de Responsables
+                </a>
+            </li>
+            
+
+            <li>
+                <a href="{% url 'superadmin_usuarios' %}">
+                    <span class="material-symbols-outlined icon">manage_accounts</span>
+                    Gestión de Usuarios
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_auditoria' %}">
+                    <span class="material-symbols-outlined icon">timer</span>
+                    Auditoría
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_revision' %}">
+                    <span class="material-symbols-outlined icon">search</span>
+                    Revisión
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_registro_chequeos' %}">
+                    <span class="material-symbols-outlined icon">edit_note</span>
+                    Registro de Chequeos
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- FOOTER -->
+        <div class="sidebar-footer">
+            <a href="{% url 'logout' %}" class="logout-btn">
+                ⏻ Cerrar Sesión
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin-main">
+
+            {% if messages %}
+                <script id="django-messages" type="application/json">
+                    [
+                    {% for message in messages %}
+                        "{{ message|escapejs }}"{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                    ]
+                </script>
+                <script>
+                    (function(){
+                        var el = document.getElementById('django-messages'); if(!el) return;
+                        try{ var msgs = JSON.parse(el.textContent || el.innerText || '[]'); msgs.forEach(function(m){ alert(m); }); }catch(e){ console.error(e); }
+                    })();
+                </script>
+            {% endif %}
+
+            <h2 class="amenazas-title">Gestión de Amenazas</h2>
+
+      <div class="amenazas-container">
+
+          <div class="amenazas-topbar">
+              <form method="get" class="amenazas-search controles-search">
+                  <label>Buscar:</label>
+                  <input type="text" name="q" value="{{ q }}" placeholder="Nombre de la amenaza">
+                  <label>Estado:</label>
+                  <select name="estado" class="controles-search">
+                      <option value="" {% if not estado %}selected{% endif %}>Todos</option>
+                      <option value="activo" {% if estado == 'activo' %}selected{% endif %}>Activo</option>
+                      <option value="inactivo" {% if estado == 'inactivo' %}selected{% endif %}>Inactivo</option>
+                  </select>
+                  <label>Área:</label>
+                  <select name="area" class="controles-search">
+                      <option value="" {% if not area %}selected{% endif %}>Todas</option>
+                      {% for a in areas %}
+                      <option value="{{ a.id_area }}" {% if area|stringformat:'s' == a.id_area|stringformat:'s' or area == a.id_area|stringformat:'s' %}selected{% endif %}>{{ a.nombre }}</option>
+                      {% endfor %}
+                  </select>
+                  <button type="submit">Buscar</button>
+              </form>
+
+              <a href="{% url 'superadmin_riesgo_create' %}" class="btn-add">
+                  + Nueva Amenaza
+              </a>
+          </div>
+
+          <div class="table-wrapper">
+              <table class="amenazas-table">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Item</th>
+                          <th>Nivel Riesgo</th>
+                          <th>Estado</th>
+                          <th>Fecha</th>
+                          <th>Creado Por</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for r in riesgos %}
+                      <tr>
+                          <td>{{ r.id_riesgo }}</td>
+                          <td>{{ r.nombre }}</td>
+                          <td class="td-descripcion">{{ r.descripcion }}</td>
+                          <td>{{ r.id_item_riesgo.nombre }}</td>
+                          <td>{{ r.get_nivel_riesgo_display }}</td>
+                          <td>{{ r.get_estado_display }}</td>
+                          <td>{{ r.fecha_creacion|date:'d/m/Y' }}</td>
+                          <td>{% if r.creado_por %}{{ r.creado_por.nombre }}{% else %}-{% endif %}</td>
+                          <td class="acciones">
+
+                              <a href="{% url 'superadmin_riesgo_inspect' r.id_riesgo %}" class="btn-action btn-view">
+                                  <span class="material-symbols-outlined">search</span>
+                              </a>
+
+                              <a href="{% url 'superadmin_riesgo_edit' r.id_riesgo %}" class="btn-action btn-edit">
+                                  <span class="material-symbols-outlined">edit</span>
+                              </a>
+
+                              <form action="{% url 'superadmin_riesgo_delete' r.id_riesgo %}" 
+                                    method="post" 
+                                    style="display:inline;">
+                                  {% csrf_token %}
+                                  <button type="submit"
+                                          class="btn-action btn-delete"
+                                          onclick="return confirm('¿Eliminar esta amenaza?');">
+                                      <span class="material-symbols-outlined">delete</span>
+                                  </button>
+                              </form>
+
+                          </td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+                          <td colspan="9" class="no-data">
+                              No se encontraron amenazas.
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Borde inferior decorativo -->
+      <img src="{% static 'core/img/borde.png' %}" 
+          alt="Borde inferior"
+          class="amenazas-borde">
+
+  </main>
+
+</div>
+
+</html>

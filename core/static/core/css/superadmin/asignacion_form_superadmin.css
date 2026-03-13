@@ -1,0 +1,135 @@
+/* ================================
+   CONTENEDOR PRINCIPAL
+================================ */
+
+.admin-main {
+  background-color: #ffffff;
+  padding: 0 0 60px 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ================================
+   QUITAR SCROLL EN ESTA VISTA
+================================ */
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ================================
+   TITULO (MISMO ESTILO PERFIL)
+================================ */
+
+.admin-main h2 {
+  background-color: #2b2b2b;
+  color: #fff;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 0 0 20px 0;
+  margin: 0;
+  margin-bottom: 45px;
+  font-size: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+/* ================================
+   CONTENEDOR FORMULARIO (GRID)
+================================ */
+
+.admin-main form {
+  margin-left: 60px;
+  width: 400px;
+  position: relative;
+  z-index: 3;
+}
+
+/* Grid layout for pixel-perfect alignment */
+.form-grid { display: grid; grid-template-columns: 105px 1fr; column-gap: 18px; row-gap: 16px; align-items: center }
+.form-grid label { text-align: right; font-weight: 600; font-size: 13px }
+.form-grid .field-wrap { width: 100% }
+.form-grid .field-wrap input, .form-grid .field-wrap select, .form-grid .field-wrap textarea { background-color: #e4e4e4; color: #2b2b2b; padding: 6px 14px; border-radius: 18px; border: none; font-size: 12.5px; height: 36px; width:100%; box-sizing: border-box }
+.form-grid .field-wrap textarea { min-height: 90px; padding-top: 10px; height: auto }
+
+/* ================================
+   BOTONES
+================================ */
+
+.admin-main button {
+  background-color: #3ba89c;
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 18px;
+  border: none;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.admin-main button:hover {
+  background-color: #2f8e84;
+}
+
+.admin-main a {
+  font-size: 12.5px;
+  text-decoration: none;
+  color: #2b2b2b;
+  font-weight: 500;
+  background-color: black;
+}
+
+/* ================================
+   MENSAJES DJANGO
+================================ */
+
+.messages {
+  margin-left: 60px;
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  z-index: 3;
+  position: relative;
+}
+
+.messages li {
+  background-color: #3ba89c;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  margin-bottom: 8px;
+}
+
+/* ================================
+   BOTÓN CANCELAR
+================================ */
+
+.admin-main form div a {
+  display: inline-block;
+  background-color: #383838; /* gris */
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.admin-main form div a:hover {
+  background-color: #ff6969;
+}
+
+/* Scoped: Ensure only form/display fields use the requested colors
+   Applies to create/edit/inspect views for asignación module */
+.form-grid .field-wrap input,
+.form-grid .field-wrap select,
+.form-grid .field-wrap textarea,
+.form-grid .field-wrap .field-value,
+.form-grid .field-wrap .display-field {
+  background-color: #e4e4e4 !important;
+  color: #2b2b2b !important;
+}

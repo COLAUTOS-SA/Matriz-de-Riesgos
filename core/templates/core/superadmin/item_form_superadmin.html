@@ -1,0 +1,163 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Super Admin - Matriz Riesgo</title>
+
+  <link rel="stylesheet" href="{% static 'core/css/superadmin/admin_sidebar_superadmin.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/superadmin/item_form_superadmin.css' %}">
+  
+  <!-- Importación de Material Icons: fuente de iconos usada para botones y enlaces en la interfaz -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+
+    <!-- HEADER -->
+    <div class="sidebar-header">
+      <div class="header-content">
+        <div class="header-text">
+          <h2>APLICATIVO</h2>
+          <span>Super Administrador</span>
+        </div>
+        <img src="{% static 'core/img/logo.png' %}" 
+           alt="Logo" 
+           class="logo">
+      </div>
+    </div>
+
+    <!-- MENÚ -->
+    <ul class="sidebar-menu">
+
+        <li>
+            <a href="{% url 'superadmin_profile' %}">
+                <span class="material-symbols-outlined icon">person</span>
+                Mi Perfil
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="{% url 'superadmin_items' %}">
+                <span class="material-symbols-outlined icon">folder</span>
+                Gestión de Items
+            </a>
+        </li>
+
+      <li>
+        <a href="{% url 'superadmin_amenazas' %}">
+          <span class="material-symbols-outlined icon">warning</span>
+          Gestión de Amenazas
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_controles' %}">
+          <span class="material-symbols-outlined icon">checklist</span>
+          Gestión de Controles
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_asignacion' %}">
+          <span class="material-symbols-outlined icon">groups</span>
+          Asignación de Responsables
+        </a>
+      </li>
+
+            <li>
+          <a href="{% url 'superadmin_usuarios' %}">
+              <span class="material-symbols-outlined icon">manage_accounts</span>
+              Gestión de Usuarios
+          </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_auditoria' %}">
+          <span class="material-symbols-outlined icon">timer</span>
+          Auditoría
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_revision' %}">
+          <span class="material-symbols-outlined icon">search</span>
+          Revisión
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_registro_chequeos' %}">
+          <span class="material-symbols-outlined icon">edit_note</span>
+          Registro de Chequeos
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- FOOTER -->
+    <div class="sidebar-footer">
+      <a href="{% url 'logout' %}" class="logout-btn">
+        ⏻ Cerrar Sesión
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="admin-main">
+
+    {% if messages %}
+    <script id="django-messages" type="application/json">
+      [
+      {% for message in messages %}
+        "{{ message|escapejs }}"{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+      ]
+    </script>
+    <script>
+      (function(){
+        var el = document.getElementById('django-messages'); if(!el) return;
+        try{ var msgs = JSON.parse(el.textContent || el.innerText || '[]'); msgs.forEach(function(m){ alert(m); }); }catch(e){ console.error(e); }
+      })();
+    </script>
+    {% endif %}
+
+  <h2>{{ action }}</h2>
+
+  <form method="post" class="profile-form">
+  {% csrf_token %}
+  <div class="form-content">
+    <div class="form-grid">
+      {% for field in form.visible_fields %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="field-wrap">
+          {{ field }}
+          {% if field.help_text %}<div class="helptext">{{ field.help_text }}</div>{% endif %}
+          {% for error in field.errors %}
+            <div class="field-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top:14px">
+      <button type="submit">Guardar</button>
+      <a href="{% url 'superadmin_items' %}">Cancelar</a>
+    </div>
+  </div>
+  </form>
+
+  </main>
+
+</div>
+
+</body>
+</html>

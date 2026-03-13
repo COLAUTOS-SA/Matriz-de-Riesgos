@@ -1,0 +1,200 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel Super Admin - Matriz Riesgo</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/admin_sidebar_superadmin.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/superadmin/revision_superadmin.css' %}">
+    
+    <!-- Importación de Material Icons: fuente de iconos usada para botones y enlaces en la interfaz -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+
+        <!-- HEADER -->
+        <div class="sidebar-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h2>APLICATIVO</h2>
+                    <span>Super Administrador</span>
+                </div>
+                <img src="{% static 'core/img/logo.png' %}" 
+                     alt="Logo" 
+                     class="logo">
+            </div>
+        </div>
+
+        <!-- MENÚ -->
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="{% url 'superadmin_profile' %}">
+                    <span class="material-symbols-outlined icon">person</span>
+                    Mi Perfil
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_items' %}">
+                    <span class="material-symbols-outlined icon">folder</span>
+                    Gestión de Items
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_amenazas' %}">
+                    <span class="material-symbols-outlined icon">warning</span>
+                    Gestión de Amenazas
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_controles' %}">
+                    <span class="material-symbols-outlined icon">checklist</span>
+                    Gestión de Controles
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_asignacion' %}">
+                    <span class="material-symbols-outlined icon">groups</span>
+                    Asignación de Responsables
+                </a>
+            </li>
+
+                        <li>
+                <a href="{% url 'superadmin_usuarios' %}">
+                    <span class="material-symbols-outlined icon">manage_accounts</span>
+                    Gestión de Usuarios
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_auditoria' %}">
+                    <span class="material-symbols-outlined icon">timer</span>
+                    Auditoría
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="{% url 'superadmin_revision' %}">
+                    <span class="material-symbols-outlined icon">search</span>
+                    Revisión
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'superadmin_registro_chequeos' %}">
+                    <span class="material-symbols-outlined icon">edit_note</span>
+                    Registro de Chequeos
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- FOOTER -->
+        <div class="sidebar-footer">
+            <a href="{% url 'logout' %}" class="logout-btn">
+                ⏻ Cerrar Sesión
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+  <main class="admin-main">
+
+
+      <h2 class="revision-title">Revisión diaria de controles</h2>
+
+      <div class="revision-info">
+          Usuario: <strong>{{ usuario.nombre }}</strong>
+          <span class="separator">—</span>
+          Fecha: <strong>{{ today }}</strong>
+      </div>
+
+          <form method="post" class="revision-form">
+              {% csrf_token %}
+
+              <div class="revision-container">
+
+                  {% for row in controles %}
+                  <div class="control-card">
+
+                      <div class="control-header">
+
+                          <div class="check-area">
+                              {% if row.is_checked %}
+                                  <input type="checkbox"
+                                        checked
+                                        disabled>
+                              {% else %}
+                                  <input type="checkbox"
+                                        name="check"
+                                        value="{{ row.control.id_control }}">
+                              {% endif %}
+                          </div>
+
+                          <div class="control-main">
+                              <div class="control-name">
+                                  {{ row.control.nombre }}
+                              </div>
+
+                              <div class="control-meta">
+                                  <span><strong>Amenaza:</strong> {{ row.control.id_riesgo.nombre }}</span>
+                                  <span><strong>Item:</strong> {{ row.control.id_riesgo.id_item_riesgo.nombre }}</span>
+                                  <span><strong>Frecuencia:</strong> {{ row.control.frecuencia }}</span>
+                                  <span><strong>Estado:</strong> {{ row.control.get_estado_display }}</span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="control-observacion">
+                          <label>Observaciones</label>
+
+                          {% if row.is_checked %}
+                              <textarea disabled>{{ row.observation }}</textarea>
+                          {% else %}
+                              <textarea name="obs_{{ row.control.id_control }}">{{ row.observation }}</textarea>
+                          {% endif %}
+                      </div>
+
+                  </div>
+
+                  {% empty %}
+                  <div class="no-data">
+                      No hay controles asignados.
+                  </div>
+                  {% endfor %}
+
+              </div>
+
+              <div class="revision-actions">
+                  <button type="submit" class="btn-save">
+                      Guardar
+                  </button>
+              </div>
+
+          </form>
+
+          <img src="{% static 'core/img/borde.png' %}" 
+              alt="Borde inferior"
+              class="revision-borde">
+
+  </main>
+
+</div>
+
+
+</html>

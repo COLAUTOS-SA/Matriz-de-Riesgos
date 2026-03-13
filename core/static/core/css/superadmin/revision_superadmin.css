@@ -1,0 +1,243 @@
+/* =================================
+   BLOQUEAR SCROLL GENERAL
+================================= */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Evitar scroll global: gestionar el scroll en contenedores internos */
+}
+
+/* =================================
+   CONTENEDOR PRINCIPAL
+================================= */
+
+.admin-main {
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  padding: 0 0 80px 0; /* Ajuste de padding: eliminar padding superior/lateral para alinear el layout principal */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* =================================
+   TITULO
+================================= */
+
+.revision-title {
+  background-color: #2b2b2b;
+  color: #fff;
+
+  display: inline-flex; /* Usar inline-flex (mejor alineación y control del centro vertical) en lugar de inline-block */
+  align-items: center;
+
+  padding: 10px 22px;
+  border-radius: 0 0 18px 0;
+
+  margin: 0; /* Remover margen superior para un alineado consistente */
+  font-size: 18px;
+
+  width: fit-content; /* Ajustar ancho al contenido de texto */
+}
+
+/* =================================
+   INFO SUPERIOR
+================================= */
+
+.revision-info {
+  margin: 20px 60px 15px 60px;
+  font-size: 14px;
+  color: #444;
+  position: relative;
+  z-index: 2;
+}
+
+.separator {
+  margin: 0 10px;
+}
+
+/* =================================
+   FORM FLEXIBLE
+================================= */
+
+.revision-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* Necesario para que el contenedor flex permita scroll interno correctamente */
+  position: relative;
+  z-index: 2;
+}
+
+/* =================================
+   CONTENEDOR CON SCROLL
+================================= */
+
+.revision-container {
+  margin: 0 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto; /* Habilitar scroll vertical únicamente en este contenedor */
+  padding-right: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scroll personalizado */
+
+.revision-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.revision-container::-webkit-scrollbar-thumb {
+  background-color: #3ba89c;
+  border-radius: 10px;
+}
+
+.revision-container::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* =================================
+   CARDS DE CONTROL
+================================= */
+
+.control-card {
+  background-color: #f4f6f5;
+  border-radius: 10px;
+  padding: 18px;
+  transition: 0.2s ease;
+  border-left: 5px solid #3ba89c;
+}
+
+.control-card:hover {
+  background-color: #e9eeec;
+}
+
+.control-header {
+  display: flex;
+  gap: 15px;
+}
+
+.check-area {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.check-area input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.control-main {
+  flex: 1;
+}
+
+.control-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.control-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 12.5px;
+  color: #555;
+}
+
+/* =================================
+   OBSERVACIONES
+================================= */
+
+.control-observacion {
+  margin-top: 15px;
+}
+
+.control-observacion label {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.control-observacion textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 12.5px;
+  resize: vertical;
+  min-height: 60px;
+  outline: none;
+}
+
+.control-observacion textarea:focus {
+  border-color: #3ba89c;
+}
+
+/* =================================
+   BOTON GUARDAR
+================================= */
+
+.revision-actions {
+  margin: 15px 60px 0 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-save {
+  background-color: #3ba89c;
+  color: #fff;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #2f8e84;
+}
+
+/* =================================
+   NO DATA
+================================= */
+
+.no-data {
+  padding: 20px;
+  text-align: center;
+  background-color: #eef2f1;
+  border-radius: 8px;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+/* =================================
+   BORDE INFERIOR (DECORATIVO)
+================================= */
+
+.revision-borde {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0; 
+}
+
+.messages{
+    background-color: rgb(0, 255, 136);
+}

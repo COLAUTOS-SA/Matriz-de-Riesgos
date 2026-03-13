@@ -1,0 +1,190 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Super Admin - Matriz Riesgo</title>
+
+  <link rel="stylesheet" href="{% static 'core/css/superadmin/admin_sidebar_superadmin.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/superadmin/registro_chequeos_superadmin.css' %}">
+  
+  <!-- Importación de Material Icons: fuente de iconos usada para botones y enlaces en la interfaz -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+
+    <!-- HEADER -->
+    <div class="sidebar-header">
+      <div class="header-content">
+        <div class="header-text">
+          <h2>APLICATIVO</h2>
+          <span>Super Administrador</span>
+        </div>
+        <img src="{% static 'core/img/logo.png' %}" 
+           alt="Logo" 
+           class="logo">
+      </div>
+    </div>
+
+    <!-- MENÚ -->
+    <ul class="sidebar-menu">
+
+      <li>
+        <a href="{% url 'superadmin_profile' %}">
+          <span class="material-symbols-outlined icon">person</span>
+          Mi Perfil
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_items' %}">
+          <span class="material-symbols-outlined icon">folder</span>
+          Gestión de Items
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_amenazas' %}">
+          <span class="material-symbols-outlined icon">warning</span>
+          Gestión de Amenazas
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_controles' %}">
+          <span class="material-symbols-outlined icon">checklist</span>
+          Gestión de Controles
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_asignacion' %}">
+          <span class="material-symbols-outlined icon">groups</span>
+          Asignación de Responsables
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_usuarios' %}">
+          <span class="material-symbols-outlined icon">manage_accounts</span>
+          Gestión de Usuarios
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_auditoria' %}">
+          <span class="material-symbols-outlined icon">timer</span>
+          Auditoría
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'superadmin_revision' %}">
+          <span class="material-symbols-outlined icon">search</span>
+          Revisión
+        </a>
+      </li>
+
+      <li  class="active">
+        <a href="{% url 'superadmin_registro_chequeos' %}">
+          <span class="material-symbols-outlined icon">edit_note</span>
+          Registro de Chequeos
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- FOOTER -->
+    <div class="sidebar-footer">
+      <a href="{% url 'logout' %}" class="logout-btn">
+        ⏻ Cerrar Sesión
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="admin-main">
+
+
+      <h2 class="registro-title">Registro de Chequeos</h2>
+
+      <div class="registro-container">
+
+      <div class="registro-topbar">
+        <form method="get" class="registro-search">
+          <label>Buscar:</label>
+          <input type="text" name="q" value="{{ q }}" placeholder="usuario o control">
+          <label>Desde:</label>
+          <input type="date" name="fecha_inicio" value="{{ fecha_inicio }}">
+          <label>Hasta:</label>
+          <input type="date" name="fecha_fin" value="{{ fecha_fin }}">
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
+
+          <div class="table-wrapper">
+              <table class="registro-table">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Control</th>
+                          <th>Amenaza</th>
+                          <th>Item</th>
+                          <th>Responsable</th>
+                          <th>Fecha</th>
+                          <th>Hora</th>
+                          <th>Estado</th>
+                          <th>Observaciones</th>
+              <th>Acción</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for r in registros %}
+                      <tr>
+                          <td>{{ r.id_check }}</td>
+                          <td>{{ r.id_control.nombre }}</td>
+                          <td>{{ r.id_control.id_riesgo.nombre }}</td>
+                          <td>{{ r.id_control.id_riesgo.id_item_riesgo.nombre }}</td>
+                          <td>{{ r.id_usuario.nombre }}</td>
+                          <td>{{ r.fecha_check|date:'d/m/Y' }}</td>
+                          <td>{{ r.hora_check|date:'H:i:s' }}</td>
+                          <td>{{ r.estado }}</td>
+              <td class="observaciones" title="{{ r.observaciones }}">{{ r.observaciones|default_if_none:''|truncatechars:60 }}</td>
+              <td class="acciones">
+                <a href="{% url 'superadmin_registro_inspect' r.id_check %}" class="btn-action btn-view" title="Inspeccionar">
+                  <span class="material-symbols-outlined">search</span>
+                </a>
+              </td>
+                      </tr>
+                      {% empty %}
+                      <tr>
+              <td colspan="10" class="no-data">
+                              No se encontraron registros.
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+
+      <img src="{% static 'core/img/borde.png' %}" 
+          alt="Borde inferior"
+          class="registro-borde">
+
+  </main>
+
+</div>
+
+
+</html>
