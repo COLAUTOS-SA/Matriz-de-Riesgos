@@ -1,0 +1,105 @@
+/* Copied from admin/profile.css to provide same styling for superadmin profile */
+
+.admin-main {
+  background-color: #ffffff;
+  padding: 0 0 60px 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.profile-title {
+  background-color: #2b2b2b;
+  color: #fff;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 0 0 20px 0;
+  margin: 0;
+  margin-bottom: 45px;
+  font-size: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.profile-content {
+  margin-left: 60px;
+  width: 400px;
+  position: relative;
+  z-index: 3;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile-row label {
+  width: 105px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.profile-box {
+  background-color: #e4e4e4;
+  color: #2b2b2b;
+  padding: 4px 14px;
+  border-radius: 18px;
+  min-width: 190px;
+  font-size: 12.5px;
+}
+
+.profile-password {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-password {
+  background-color: #3ba89c;
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-size: 12.5px;
+  transition: 0.3s ease;
+}
+
+.btn-password:hover {
+  background-color: #2f8e84;
+}
+
+.profile-image {
+  position: absolute;
+  bottom: 140px;
+  right: 80px;
+  width: 280px;
+  opacity: 0.95;
+  z-index: 2;
+}
+
+.profile-borde {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(-10px);
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.profile-password {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.profile-password .profile-box {
+  min-width: 10px;
+}

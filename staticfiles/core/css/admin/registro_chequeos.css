@@ -1,0 +1,243 @@
+/* ================================
+   CONTENEDOR PRINCIPAL
+================================ */
+
+.admin-main {
+  background-color: #ffffff;
+  padding: 0 0 60px 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ================================
+   TITULO
+================================ */
+
+.registro-title {
+  background-color: #2b2b2b;
+  color: #fff;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 0 0 20px 0;
+  margin: 0;
+  margin-bottom: 40px;
+  font-size: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+/* ================================
+   CONTENEDOR
+================================ */
+
+.registro-container {
+  margin-left: 60px;
+  margin-right: 60px;
+  position: relative;
+  z-index: 3;
+}
+
+/* ================================
+   BUSCADOR
+================================ */
+
+.registro-topbar {
+  margin-bottom: 25px;
+}
+
+.registro-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.registro-search label {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.registro-search input {
+  padding: 6px 12px;
+  border-radius: 18px;
+  border: 1px solid #ccc;
+  font-size: 12.5px;
+  outline: none;
+}
+
+.registro-search input:focus {
+  border-color: #3ba89c;
+}
+
+.registro-search button {
+  background-color: #3ba89c;
+  color: #fff;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 12.5px;
+  transition: 0.3s ease;
+}
+
+.registro-search button:hover {
+  background-color: #2f8e84;
+}
+
+/* ================================
+   SCROLL TABLA
+================================ */
+
+.table-wrapper {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #3ba89c;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* ================================
+   TABLA
+================================ */
+
+.registro-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 1300px;
+}
+
+.registro-table thead {
+  background-color: #2b2b2b;
+  color: #fff;
+}
+
+.registro-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #2b2b2b;
+  z-index: 2;
+  padding: 10px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.registro-table td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.registro-table tbody tr:nth-child(even) {
+  background-color: #eef2f1;
+}
+
+.registro-table tbody tr:nth-child(odd) {
+  background-color: #dfe5e4;
+}
+
+.registro-table tbody tr:hover {
+  background-color: #cfd7d6;
+  transition: 0.2s ease;
+}
+
+/* ================================
+   OBSERVACIONES
+================================ */
+
+.observaciones {
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+}
+
+/* ================================
+   ESTADO (decorativo opcional)
+================================ */
+
+.registro-table td:nth-child(8) {
+  font-weight: 600;
+}
+
+
+
+/* ================================
+   ACCIONES
+================================ */
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-action {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  line-height: 0;
+  transition: 0.3s ease;
+}
+
+.btn-action span {
+  display: block;
+  font-size: 18px;
+}
+
+.btn-view {
+  background-color: #3ba89c;
+}
+
+.btn-view:hover {
+  background-color: #2f8e84;
+}
+
+/* ================================
+   NO DATA
+================================ */
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+  font-weight: 500;
+}
+
+/* ================================
+   BORDE INFERIOR
+================================ */
+
+.registro-borde {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(-10px);
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}

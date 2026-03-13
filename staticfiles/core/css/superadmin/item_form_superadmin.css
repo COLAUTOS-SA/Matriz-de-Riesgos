@@ -1,0 +1,124 @@
+/* Replicar estilo visual tipo 'perfil' para item_form (estilos autocontenidos)
+  - Disposición en dos columnas (etiquetas a la izquierda, campos a la derecha)
+  - Campos con aspecto 'píldora' y texto oscuro
+  - Botones coherentes (Guardar / Cancelar)
+*/
+
+.admin-main {
+  background-color: #ffffff;
+  padding: 0 0 60px 0;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Título de página */
+.admin-main h2 {
+  background-color: #2b2b2b;
+  color: #fff;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 0 0 20px 0;
+  margin: 0;
+  margin-bottom: 45px;
+  font-size: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.form-content {
+  margin-left: 60px;
+  width: 520px;
+  position: relative;
+  z-index: 3;
+}
+
+/* Contenedor de contenido */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  column-gap: 18px;
+  row-gap: 16px;
+  align-items: center; /* vertical alignment exact */
+}
+
+/* Formulario en grid: alineación estricta de dos columnas (etiqueta/campo) */
+
+.form-grid label {
+  text-align: right;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.form-grid .field-wrap {
+  width: 100%;
+}
+
+.form-grid .field-wrap input,
+.form-grid .field-wrap select,
+.form-grid .field-wrap textarea,
+.form-grid .field-wrap .widget {
+  background-color: #e4e4e4;
+  color: #2b2b2b;
+  padding: 6px 14px;
+  border-radius: 18px;
+  border: none;
+  font-size: 12.5px;
+  height: 36px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form-grid .field-wrap textarea {
+  min-height: 90px;
+  padding-top: 10px;
+  height: auto;
+}
+
+/* Botones */
+button[type="submit"] {
+  background-color: #3ba89c; /* verde institucional */
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  font-size: 12.5px;
+  height: 29px;
+  display: inline-flex;
+  align-items: center;
+}
+
+button[type="submit"]:hover {
+  background-color: #2f8e84;
+}
+
+/* Enlaces 'Cancelar' estilizados como botones */
+.admin-main form div a {
+  display: inline-block;
+  background-color: #383838;
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.admin-main form div a:hover {
+  background-color: #ff6969;
+}
+
+/* Ajuste responsivo pequeño */
+@media (max-width: 700px) {
+  .form-content { width: auto; margin-left: 20px; margin-right: 20px; }
+  .form-grid { display: block; }
+  .form-grid label { display: block; text-align: left; margin-bottom: 6px; }
+}
